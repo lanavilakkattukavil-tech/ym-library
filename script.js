@@ -1,122 +1,69 @@
-
 function toggleMenu() {
 
-    const navbar = document.querySelector(".navbar");
+const navbar = document.querySelector(".navbar");
 
-    navbar.classList.toggle("active");
+navbar.classList.toggle("active");
 
 }
 
-
-
-
 document.querySelectorAll(".navbar a").forEach(function(link) {
 
-    link.addEventListener("click", function() {
+link.addEventListener("click", function() {
 
-        document.querySelector(".navbar").classList.remove("active");
-
-    });
+    document.querySelector(".navbar").classList.remove("active");
 
 });
 
-
-
+});
 
 const counters = document.querySelectorAll(".counter");
 
 const observer = new IntersectionObserver(function(entries) {
 
-    entries.forEach(function(entry) {
+entries.forEach(function(entry) {
 
-        if (entry.isIntersecting) {
+    if (entry.isIntersecting) {
 
-            const counter = entry.target;
+        const counter = entry.target;
 
-            const target = Number(counter.getAttribute("data-target"));
+        const target = Number(counter.getAttribute("data-target"));
 
-            let current = 0;
+        let current = 0;
 
-            const increment = Math.ceil(target / 80);
+        const increment = Math.ceil(target / 80);
 
-            function updateCounter() {
+        function updateCounter() {
 
-                current += increment;
+            current += increment;
 
-                if (current >= target) {
+            if (current >= target) {
 
-                    counter.innerText = target;
+                counter.innerText = target;
 
-                } else {
+            } else {
 
-                    counter.innerText = current;
+                counter.innerText = current;
 
-                    requestAnimationFrame(updateCounter);
-
-                }
+                requestAnimationFrame(updateCounter);
 
             }
 
-            updateCounter();
-
-            observer.unobserve(counter);
-
         }
 
-    });
+        updateCounter();
 
-}, {
-    threshold: 0.5
-});
-
-
-counters.forEach(function(counter) {
-
-    observer.observe(counter);
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-    const foundBooks = books.filter(function(book) {
-
-        return (
-            book.title.toLowerCase().includes(searchInput) ||
-            book.author.toLowerCase().includes(searchInput) ||
-            book.subject.toLowerCase().includes(searchInput)
-        );
-
-    });
-
-
-    if (foundBooks.length > 0) {
-
-        result.innerHTML =
-            "📚 Found: " +
-            foundBooks.map(function(book) {
-
-                return book.title +
-                    " — " +
-                    book.author;
-
-            }).join("<br>");
-
-    } else {
-
-        result.innerText =
-            "Sorry, no matching book was found.";
+        observer.unobserve(counter);
 
     }
 
+});
 
+}, {
+threshold: 0.5
+});
 
+counters.forEach(function(counter) {
 
+observer.observe(counter);
+
+});
